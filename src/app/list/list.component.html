@@ -1,0 +1,25 @@
+<div class="container">
+     Repository name: <input type="text" [(ngModel)] = "userName">
+    <button class="button" (click) = "search()">Search</button>
+     <div class="row">
+            <div class="col">
+               <div *ngIf = "response">
+                     <div class="user_table" *ngFor = "let user of usersToShow;">
+                        <h1>Name: {{user.name}}</h1>
+                        <h3>Stars: {{user.stars}}</h3>
+                        <h3>Last Commit: {{user.lastCommit}}</h3>
+                        <h3>
+                        <a href="{{user.path}}">Github Link</a>
+                        </h3>
+                        <button class="small_button" (click) = "onSelect(user)">Show details</button>
+                     </div>
+                     <br>
+                     <button class="button_paginator" (click) = "choosePage(0)" >1</button>
+                     <button class="button_paginator" (click) = "choosePage(1)" >2</button>
+                     <button class="button_paginator" (click) = "choosePage(2)" >3</button>
+                     <br>
+                     <br>
+                </div>
+            </div>
+     </div>
+</div>

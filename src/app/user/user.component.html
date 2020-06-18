@@ -1,0 +1,16 @@
+<div *ngIf = "feature" class="container">
+    <div class="card">
+        <h1>{{feature['name']}}</h1>
+        <h3>Stars: {{feature.stars}}</h3>
+        <h3>Date of last commit: {{feature['lastCommit']}}</h3>
+        <h3><a href="{{feature.path}}">Directory link</a></h3>
+        <img style="width: 200px; height: 200px;" src="{{feature.photo}}" alt="">
+        <h3>Nick: {{feature['nickName']}}</h3>
+        <h3><a href = "{{feature['linkToUser']}}">User link</a></h3>
+        <button class="button" (click) = "showLanguages()">Show languages </button>
+        <p *ngFor = "let language of languages;">{{language}}</p>
+        <h3>Description: {{feature['description']}}</h3>
+        <button class="button" (click) = "showContributors()">Show contributors</button>
+        <p *ngFor = "let contr of contributors;">{{contr}}</p>
+    </div>
+</div>
