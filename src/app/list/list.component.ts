@@ -1,8 +1,9 @@
+
 import { Component, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserInfo } from '../userinfo.model'
 import { EventEmitter } from '@angular/core';
-import { callbackify } from 'util';
+
 
 
 @Component({
@@ -17,13 +18,13 @@ export class ListComponent implements OnInit {
   
   userName: string = "";
   response: any;
+  buttons : any;
   userDB = [];
   currentPage: number = 0;
   usersToShow = [];
- 
   constructor(private http: HttpClient) {
-
-  }
+  
+  } 
 
     onSelect(num: any){
       this.featureSelected.emit(num);
@@ -33,7 +34,20 @@ export class ListComponent implements OnInit {
       for (let i = 0; i < 10; i++){
         this.usersToShow[i] = this.userDB[page*10 + i];
       }
+      function changeColor(i){
+
+        this.buttons = document.querySelectorAll(".button_paginator");
+        this.buttons.forEach(item =>{
+          item.classList.remove("green");
+        });
+        this.buttons[i].classList.add("green");
+
+        }
+      
+        setTimeout(changeColor, 1, page);
     }
+
+
 
    search(){
     this.http.get('https://api.github.com/search/repositories?q=' + this.userName + '+&sort=stars')
@@ -52,10 +66,12 @@ export class ListComponent implements OnInit {
             this.response['items'][i].description,
             this.response['items'][i].contributors_url
             )
-        }
+        }  
+        this.choosePage(0);
       })
    }
 
+  
   ngOnInit(): void {
   }
 }
